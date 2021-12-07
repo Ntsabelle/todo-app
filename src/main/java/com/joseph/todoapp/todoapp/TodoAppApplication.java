@@ -25,6 +25,7 @@ public class TodoAppApplication implements CommandLineRunner  {
 
     @Override
     public void run(String... args) throws Exception {
+    	//test git
 
         User user = new User();
         user.setPassword("should be hashed");
