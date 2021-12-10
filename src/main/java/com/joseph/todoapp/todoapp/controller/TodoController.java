@@ -1,6 +1,5 @@
 package com.joseph.todoapp.todoapp.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.joseph.todoapp.todoapp.entity.Todo;
@@ -124,19 +122,6 @@ public class TodoController implements CommandLineRunner {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
-
-	@GetMapping(params = "content")
-	public ResponseEntity<List<Todo>> getTodoContent(@RequestParam(value = "content") String name) {
-		List<Todo> filteredTodo = new ArrayList<Todo>();
-
-		for (Todo todo : todoRepo.findAll()) {
-			if (todo.getContent().equalsIgnoreCase("t")) {
-				filteredTodo.add(todo);
-			}
-		}
-		return new ResponseEntity<List<Todo>>(filteredTodo, HttpStatus.OK);
-
 	}
 
 	@Override
