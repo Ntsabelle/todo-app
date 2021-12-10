@@ -1,9 +1,7 @@
 package com.joseph.todoapp.todoapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 public class Todo {
@@ -12,37 +10,56 @@ public class Todo {
     private Long id;
     private String content;
     private Boolean completed = Boolean.FALSE;
+    
+    
+	public Todo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Todo() {
-    }
 
-    public Todo(Long id, String content, Boolean completed) {
-        this.id = id;
-        this.content = content;
-        this.completed = completed;
-    }
+	public Todo(Long id, String content, Boolean completed) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.completed = completed;
+	}
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Boolean getCompleted() {
-        return completed;
-    }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
+	public String getContent() {
+		return content;
+	}
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+	public Boolean getCompleted() {
+		return completed;
+	}
+
+
+	public void setCompleted(Boolean completed) {
+		this.completed = completed;
+	}
+	
+	
+	
+	
+    
+    
+    
 }
+
