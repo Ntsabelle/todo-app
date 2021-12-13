@@ -84,26 +84,21 @@ public class TodoController implements CommandLineRunner {
 	}
 
 	@PutMapping("/todos/{id}")
-	public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo) {
+	public ResponseEntity<Todo> updateTodo(@PathVariable(value = "id") Long id,@RequestBody Todo todo) {
 		try {
 
-			List<Todo> list = todoRepo.findAll();
-
-			if (todo.getContent().equalsIgnoreCase("I'm lazy"))
+			Optional<Todo> list = todoRepo.findById(id);
+			
+			if (todo.getContent().equalsIgnoreCase("I'm lazy")) {
 				return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-
-			else if (!(list.isEmpty() || list.size() == 0)) {
-				for (int i = 0; i < list.size(); i++) {
-
-					if (list.get(i).getContent().equalsIgnoreCase(todo.getContent())) {
-						return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-					}
-
-				}
-				return new ResponseEntity<>(todoRepo.save(todo), HttpStatus.OK);
-
-			} else
-				return new ResponseEntity<>(todoRepo.save(todo), HttpStatus.OK);
+			}
+			else
+			
+			if(!list.isPresent())
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			
+			todo.setId(id);
+			return new ResponseEntity<>(todoRepo.save(todo), HttpStatus.OK);
 
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
